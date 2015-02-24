@@ -1,0 +1,132 @@
+% This is LLNCS.DEM the demonstration file of
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.4 for LaTeX2e as of 16. April 2010
+%
+\documentclass{llncs}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{xspace}
+\usepackage{wrapfig}
+\usepackage[]{algorithm2e}
+
+\newlength{\figcapspace}
+\setlength{\figcapspace}{-3ex plus 2pt minus 3pt}
+\newcommand{\scap}[2]{\vspace*{\figcapspace}\caption{\sl #2}\label{#1}}
+
+\newlength{\figtopspace}
+\newlength{\figbottomspace}
+\setlength{\figtopspace}{-2pt}
+\setlength{\figbottomspace}{-2pt plus 2pt minus 1pt}
+
+\newlength{\tabtopspace}
+\newlength{\tabbottomspace}
+\setlength{\tabtopspace}{-1ex}
+\setlength{\tabbottomspace}{-1ex plus 2pt minus 2pt}
+
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{4}
+\renewcommand{\topfraction}{.9}
+\renewcommand{\bottomfraction}{.9}
+\setcounter{totalnumber}{6}
+\renewcommand{\floatpagefraction}{.9}
+\renewcommand{\dblfloatpagefraction}{.9}
+\renewcommand{\dbltopfraction}{.9}
+\setcounter{dbltopnumber}{4}
+\renewcommand{\textfraction}{.1}
+
+\newenvironment{topfig}{\begin{figure}[tb]
+\vspace{\figtopspace}}{\vspace{\figbottomspace}
+\end{figure}}
+
+\newenvironment{dblfig}{\begin{figure*}[tb]
+\vspace{\figtopspace}}{\vspace*{\figbottomspace}
+\end{figure*}}
+
+\newenvironment{toptab}{\begin{table}[tb]
+\vspace{\tabtopspace}}{\vspace{\tabbottomspace}
+\end{table}}
+\newenvironment{dbltab}{\begin{table*}[tb]
+\vspace{\tabtopspace}}{\vspace{\tabbottomspace}
+\end{table*}}
+
+\newcommand{\sectref}[1]{Sect.~\ref{#1}\xspace}
+
+\newenvironment{tightdescription}%
+        {\begin{list}{}{%
+                \setlength{\itemsep}{0pt}%
+                \setlength{\topsep}{0pt}%
+                \setlength{\parskip}{0pt}%
+                \setlength{\parsep}{0pt}%
+                %\setlength{\leftmargin}{-1mm}%
+        }}%
+        {\end{list}}
+
+\newenvironment{tightitemize}%
+        {\begin{list}{$\bullet$}{%
+                \setlength{\itemsep}{0ex}\setlength{\topsep}{0pt}%
+                \setlength{\parskip}{0pt}\setlength{\parsep}{0pt}%
+%                \setlength{\itemindent}{1pt}%
+                \setlength{\labelwidth}{0.25cm}%
+                \setlength{\leftmargin}{0cm}\addtolength{\leftmargin}{\labelwidth}\addtolength{\leftmargin}{\labelsep}%
+%               \setlength{\leftmargin}{1mm}%
+        }}%
+        {\end{list}}
+
+%
+\input{fp-macros}
+\begin{document}
+\newcommand{\cmu}{\ensuremath{^\dag}}
+\newcommand{\fcup}{\ensuremath{^\ddag}}
+\pagestyle{headings}  % switches on printing of running heads
+\addtocmark{Compiling Linear Logic Programs}
+\mainmatter              % start of the contributions
+%
+\title{Compiling Linear Logic Programs with Aggregates, Comprehensions and Rule
+Priorities}
+%
+\titlerunning{Compiling Linear Logic Programs}
+\author{Flavio Cruz\inst{1}\inst{2} \and Ricardo Rocha\inst{2}}
+
+\institute{Carnegie Mellon University, Pittsburgh, PA 15213, USA\\
+\email{fmfernan@cs.cmu.edu}
+\and
+CRACS \& INESC TEC, Faculty of Sciences, University Of Porto\\
+Rua do Campo Alegre, 1021/1055, 4169-007 Porto, Portugal\\
+\email{\{flavioc, ricroc\}@dcc.fc.up.pt}}
+%
+\authorrunning{Ivar Ekeland et al.} % abbreviated author list (for running head)
+
+\maketitle
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\section{Introduction}
+\input{introduction}
+
+\section{Linear Meld}
+\input{language}
+
+\section{Supporting Runtime}
+\input{runtime}
+
+\section{Compiling to C++}
+\input{compiling}
+
+\section{Experimental Results}
+\input{results}
+
+\section{Related Work}
+\input{related_work}
+
+\section{Conclusions}
+\input{conclusions.tex}
+
+\bibliographystyle{splncs03}
+\bibliography{refs}
+\end{document}

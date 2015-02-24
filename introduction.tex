@@ -1,0 +1,40 @@
+Linear Meld~(LM) is a linear logic programming language
+designed with the goal of implementing parallel graph-based
+algorithms~\cite{cruz-iclp14}. Like Datalog, LM is
+a forward-chaining programming logic because computation is driven by a set of
+inference rules that are used to update a database of logical facts. In Datalog,
+programs are monotonic therefore the database grows in size as more facts are
+inferred from the logical rules. Since LM is based on linear logic, logical
+facts are linear and can be retracted when a rule is inferred. The use of linear
+facts greatly increases the power of the language but also increase the
+complexity of its implementation since database facts are removed often.
+
+LM is a high-level declarative language and thus offers a concise and
+expressive framework to define graph based algorithms that are provably correct.
+LM has been applied to a wide range of problems and machine learning
+algorithms, including: belief propagation~\cite{Gonzalez+al:aistats09paraml},
+belief propagation with residual splash~\cite{Gonzalez+al:aistats09paraml},
+PageRank, graph coloring, N-Queens, shortest path, diameter estimation,
+map reduce, quick-sort, neural network training, minimax, etc.
+
+In a previous paper~\cite{cruz-ppdp14}, we have described the implementation of the
+virtual machine, including its data structures and how the programs are
+paralellized. Recently, we have decided to compile LM programs into C++ code in
+order to avoid the overhead of executing interpreted byte code. We have refitted
+the runtime system to allow stand-alone compilation of programs.
+Our results show that compiled programs are between 1.5 to 2x faster than
+interpreted byte code and are competitive when compared to hand-written C
+programs.
+
+The contributions of this paper are three-fold: (1) an algorithm to compile linear
+logic rules with aggregates and comprehensions into efficient C code; (2)
+the relationship between the database layout and compiled code; and (3)
+different high level optimizations for logical rules.
+
+The remainder of the paper is organized as follows. First, we briefly introduce
+the LM language. Next, we present an overview of the runtime support available
+to compiled rules. The main contributions are then presented in
+Section~\ref{sec:compile}, including the algorithm for compiling rules,
+comprehensions and aggregates into efficient iterator-based C code. We then
+present experimental results comparing our compiled programs with our old
+implementation. The paper finishes with related work and some conclusions.
