@@ -2,15 +2,15 @@
 LM shares many similarities with Constraint Handling Rules~
 (CHR)~\cite{Betz:2005kx,DBLP:journals/corr/abs-1006-3039}.  CHR is a concurrent
 committed-choice constraint language used to write constraint solvers. A CHR
-program is a set of rules and a set of constraints (which can be seen as facts).
-The constraint store can be see as the database of facts and rules manipulate
-the constraint store. Many basic optimizations used in the LM compiler such as
-join optimizations and the use of different data structures for indexing facts
-were inspired in work done on CHR~\cite{DBLP:journals/corr/cs-PL-0408025}.
-Wuille et al.~\cite{42866} have described a CHR implementation in C that follows
-some of the ideas presented here and Koninck et al.~\cite{chrp} showed how to
-compile CHR programs with dynamic priorities into Prolog. Our work distinguishes
-itself from these two works by supporting comprehensions, aggregates and rule
-priorities. Compilation of LM programs is
-also novel due to the implicit parallelism of rules. Finally, our results are
-slightly better than competing CHR systems when compared to C programs.
+program is a set of rules and a set of constraints.  The constraint store can be
+seen as a database of facts and rules manipulate the constraint store. Many
+basic optimizations used in the LM compiler such as join optimizations and the
+use of different data structures for indexing facts were inspired in work done
+on CHR~\cite{DBLP:journals/corr/cs-PL-0408025}.  Wuille et al.~\cite{42866} have
+described a CHR to C compiler that follows some of the ideas presented here and
+Koninck et al.~\cite{chrp} showed how to compile CHR programs with dynamic
+priorities into Prolog. Our work distinguishes itself from these two works by
+supporting a novel combination of comprehensions, aggregates and rule
+priorities. Compilation of LM programs is also novel due to the implicit
+parallelism of rules. Finally, our results are slightly better than competing
+CHR systems when compared to C programs.
