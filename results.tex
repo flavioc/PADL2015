@@ -1,0 +1,15 @@
+This section presents experimental results for our compiled code.
+We compare the execution speed of our code against a similar code in a virtual
+
+This section presents initial results for our VM. First, we present a
+comparison with similar programs written in other programming
+languages in order to show evidence that our VM is viable. Then, we
+present scalability results in order to show that LM programs can take
+advantage of multicore architectures.
+
+For our experimental setup, we used a machine with 32 (2x16) Core AMD
+Opteron (tm) Processor 6274 $@$ 2.2 GHz with 32 GBytes of RAM memory
+and running the Linux kernel 3.8.3-1.fc17.x86\_64.  We compiled our VM
+using GCC 4.7.2 (g++) with the flags \texttt{-O3 -std=c+0x
+  -march=x86-64}. We run all experiments 3 times and averaged the
+execution time.

@@ -7,6 +7,7 @@ paper.pdf: Makefile paper.tex \
 		related_work.tex \
 		language.tex \
 		runtime.tex \
+		results.tex \
 		compiling.tex \
 		abstract.tex
 	pdflatex paper.tex
