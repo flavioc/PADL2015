@@ -9,7 +9,8 @@ paper.pdf: Makefile paper.tex \
 		runtime.tex \
 		results.tex \
 		compiling.tex \
-		abstract.tex
+		abstract.tex \
+		conclusions.tex
 	pdflatex paper.tex
 	pdflatex paper.tex
 	bibtex paper

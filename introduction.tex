@@ -19,21 +19,24 @@ map reduce, quick-sort, neural network training, minimax, and many others.
 
 In previous work~\cite{cruz-ppdp14}, we have described the implementation of the
 virtual machine, including its data structures and how programs are
-paralellized. Recently, we have decided to compile LM programs into C++ code in
-order to avoid the overhead of executing interpreted byte code and, for that we have refitted
-the runtime system to allow stand-alone compilation of programs.
-Our results show that compiled programs can be two times faster than
-interpreted byte code which makes them more competitive when compared to hand-written C
-programs.
+paralellized. In this paper, we describe our compilation strategy for
+transforming logical rules into C++ code. While the initial compiler for the virtual
+machine used an identical compilation scheme (not fully described
+in~\cite{cruz-ppdp14}), we have refitted the runtime system to allow
+stand-alone compilation of programs. Our goal was to reduce the overhead of executing
+interpreted byte code and better understand the effectiveness and limitations of the
+compilation scheme. Our results show that compiled programs are only 2 to 6
+times slower than hand-written C programs.
 
-We have designed an algorithm that compiles logical rules with comprehensions and
-aggregates into efficient C++ code. The compiler also supports rule priorities, allowing
+We present an algorithm that compiles logical rules with comprehensions and
+aggregates into efficient C++ code. The compiler supports rule priorities, allowing
 the programmer to order rules based on their priority of inference. To the best
 of our knowledge, this is the first available compilation strategy for a linear logic
 language that supports these 3 features combined. The
 contributions of this paper are then three-fold: (1) a novel algorithm to compile
-prioritized linear logic rules with aggregates and comprehensions; (2) the relationship
-between the database layout and compiled code; and (3) comparisons to
+prioritized linear logic rules with aggregates and comprehensions; (2) the
+interplay between the database layout and compiled code; and (3) comparison and
+analsys by comparing our compilation with
 hand-written C programs and interpreted code.
 
 The remainder of the paper is organized as follows. First, we briefly introduce
