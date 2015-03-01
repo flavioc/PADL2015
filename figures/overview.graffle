@@ -7,7 +7,7 @@
 	<key>ApplicationVersion</key>
 	<array>
 		<string>com.omnigroup.OmniGraffle6</string>
-		<string>159.7.0.224654</string>
+		<string>159.9.0.225577</string>
 	</array>
 	<key>AutoAdjust</key>
 	<true/>
@@ -1687,6 +1687,15 @@ Hash Table}</string>
 				</dict>
 				<key>stroke</key>
 				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<string>0.552941</string>
+						<key>g</key>
+						<string>0.427451</string>
+						<key>r</key>
+						<string>0.396078</string>
+					</dict>
 					<key>Width</key>
 					<real>1.2000000476837158</real>
 				</dict>
@@ -1742,7 +1751,7 @@ Hash Table}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2015-02-23 01:56:51 +0000</string>
+	<string>2015-02-28 00:49:34 +0000</string>
 	<key>Modifier</key>
 	<string>Flávio Cruz</string>
 	<key>NotesVisible</key>
@@ -1818,7 +1827,7 @@ Hash Table}</string>
 		<key>Expanded_Canvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{358, -94}, {1548, 795}}</string>
+		<string>{{25, -374}, {1436, 795}}</string>
 		<key>ShowInfo</key>
 		<true/>
 		<key>ShowRuler</key>
@@ -1830,7 +1839,7 @@ Hash Table}</string>
 		<key>TopSlabHeight</key>
 		<real>250</real>
 		<key>VisibleRegion</key>
-		<string>{{-237, 6}, {1034, 650}}</string>
+		<string>{{-181, 6}, {922, 650}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
