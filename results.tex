@@ -91,7 +91,10 @@ implement those operations because otherwise it would be too slow. Therefore,
 and since the rules tend to manipulate a small number of facts, the interpreted
 and compiled versions perform about the same. This program has also the best
 results which proves that the program spends a huge amount of time performing
-floating point calculations.
+floating point calculations. For comparison purposes, we used GraphLab, an
+efficient machine learning framework for writing parallel graph-based machine
+learning algorithms in C++.  GraphLab's ~\cite{GraphLab2010} version of the
+algorithm is slightly slower than the C version.
 
 The Heat Transfer program also performs floating operations but in a much
 smaller scale than Belief Propagation. This is noticiable from the results since
