@@ -196,7 +196,7 @@ update(A), pagerank(A, OldRank)
 \end{Verbatim}
 
 The rule uses an aggregate to accumulate the sum of the
-neighbor's pageranks into a single value. This value is then assigned to a new
+neighbor's PageRank into a single value. This value is then assigned to a new
 \texttt{pagerank} fact by computing \texttt{damp/P + (1.0 - damp)*V}, where
 \texttt{V} is the aggregate value. \texttt{V} is the result of adding all the
 values in \texttt{neighbor-pagerank(A, B, V)} facts.
