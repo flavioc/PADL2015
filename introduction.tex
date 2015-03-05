@@ -1,48 +1,48 @@
-Linear Meld~(LM) is a linear logic programming language
-aimed for the parallel implementation of graph-based
-algorithms~\cite{cruz-iclp14}. Like Datalog, LM is
-a \emph{forward-chaining} logic programming language since computation is driven by a set of
-inference rules that are used to update a database of logical facts. In Datalog,
-programs are monotonic and therefore the database grows in size as more facts are
-inferred from the logical rules. In LM, logical
-facts are linear and thus can be retracted when a rule is inferred. The use of linear
-facts greatly increases the power of the language but also increase the
-complexity of its implementation since database facts are removed often.
+Linear Meld~(LM) is a linear logic programming language aimed for the parallel
+implementation of graph-based algorithms~\cite{cruz-iclp14}.  LM is a high-level
+declarative language that offers a concise and expressive framework to define
+graph based algorithms that are provably correct.  LM has been applied to a wide
+range of problems and machine learning algorithms, including: belief
+propagation~\cite{Gonzalez+al:aistats09paraml}, belief propagation with residual
+splash~\cite{Gonzalez+al:aistats09paraml}, PageRank, graph coloring, N-Queens,
+shortest path, diameter estimation, map reduce, quick-sort, neural network
+training, minimax, and many others.
 
-LM is a high-level declarative language that offers a concise and
-expressive framework to define graph based algorithms that are provably correct.
-LM has been applied to a wide range of problems and machine learning
-algorithms, including: belief propagation~\cite{Gonzalez+al:aistats09paraml},
-belief propagation with residual splash~\cite{Gonzalez+al:aistats09paraml},
-PageRank, graph coloring, N-Queens, shortest path, diameter estimation,
-map reduce, quick-sort, neural network training, minimax, and many others.
+Like Datalog, LM is a \emph{forward-chaining} logic programming language since
+computation is driven by a set of inference rules that are used to update a
+database of logical facts.  In Datalog, programs are monotonic and therefore the
+database grows in size as more facts are inferred from the logical rules. In LM,
+logical facts are linear and thus can be retracted when a rule is inferred. The
+use of linear facts greatly increases the power of the language but also
+increases the complexity of the implementation since database facts are
+retracted often.
 
 In previous work~\cite{cruz-ppdp14}, we have described the implementation of the
 virtual machine, including its data structures and how programs are
 paralellized. In this paper, we describe our compilation strategy for
-transforming logical rules into C++ code. While the initial compiler for the virtual
-machine used an identical compilation scheme (not fully described
-in~\cite{cruz-ppdp14}), we have refitted the runtime system to allow
-stand-alone compilation of programs. Our goal was to reduce the overhead of executing
-interpreted byte code and better understand the effectiveness and limitations of the
-compilation scheme. Our results show that compiled programs are only 2 to 7
-times slower than hand-written C programs.
+transforming logical rules into C++ code. While the initial compiler for the
+virtual machine used a similar compilation scheme (not fully described
+in~\cite{cruz-ppdp14}), we have refitted the runtime system to allow stand-alone
+compilation of programs. Our goal was to reduce the overhead of executing
+interpreted byte code and better understand the effectiveness and limitations of
+the compilation scheme. Experimental results show that our compiled programs are
+only 2 to 7 times slower than hand-written C programs.
 
-We present an algorithm that compiles logical rules with comprehensions and
-aggregates into efficient C++ code. The compiler supports rule priorities, allowing
-the programmer to order rules based on their priority of inference. To the best
-of our knowledge, this is the first available compilation strategy for a linear logic
-language that supports these 3 features combined. The
-contributions of this paper are then three-fold: (1) a novel algorithm to compile
-prioritized linear logic rules with aggregates and comprehensions; (2) the
-interplay between the database layout and compiled code; and (3) comparison and
-analsys by comparing our compilation with
-hand-written C programs and interpreted code.
+In this work, we present an algorithm that compiles logical rules, including
+comprehensions and aggregates, into efficient C++ code. The compiler supports
+rule priorities, allowing the programmer to order rules based on their priority
+of inference. To the best of our knowledge, this is the first available
+compilation strategy for a linear logic language that supports these 3 features
+combined. The contributions of this paper are then three-fold: (1) a novel
+algorithm to compile prioritized linear logic rules with aggregates and
+comprehensions; (2) the interplay between the database layout and compiled code;
+and (3) comparison and analysis of our compilation with hand-written C programs
+and interpreted code.
 
 The remainder of the paper is organized as follows. First, we briefly introduce
 the LM language. Next, we present an overview of the runtime support available
 to compiled rules and then we discuss our contributions which include the
 algorithm for compiling rules, comprehensions and aggregates into efficient
 iterator-based C code. We then present experimental results comparing our
-compiled programs with our old implementation. The paper finishes with related
-work and some conclusions.
+compiled programs with the old implementation and with hand-written C programs.
+The paper finishes with related work and some conclusions.

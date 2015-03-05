@@ -2,29 +2,23 @@ This section presents experimental results for our compilation strategy.  We
 compare the execution speed of our new compiled code against hand-written
 implementations in C of the same programs. We also compare the results against
 interpreted execution. Although interpreted execution uses a similar
-translation, it helps us understand the limitations of the compilation scheme by
-removing the interpretation overhead.
+translation, it helps us understand the limitations of the compilation scheme
+when removing the interpretation overhead.
 
 For our experimental setup, we used a computer with a 24 (4x6) Core AMD
-Opteron(tm) Processor 8425 HE $@$ 800 MHz with 64 GBytes of RAM memory and runs
+Opteron(tm) Processor 8425 HE $@$ 800 MHz with 64 GBytes of RAM memory running
 the Linux kernel 3.15.10-201.fc20.x86\_64. The C++ compiler used is GCC 4.8.3
-(g++) with the flags: \texttt{-O3 -std=c+0x
-   -march=x86-64}.  We run all experiments 3 times and averaged the
-execution time.
+(g++) with the flags: \texttt{-O3 -std=c+0x -march=x86-64}.  We run all
+experiments 3 times and averaged the execution time.
 
 We have implemented 5 different LM programs and their corresponding
 C versions. The programs are the following:
 
 \begin{itemize}
-\item Shortest Path (SP): a slightly modified version of the program
-                                  presented in
-                                  Fig.~\ref{fig:shortest_path_program}, where
-                                  the shortest distance is computed from all
-                                  nodes to all nodes.
 
-\item MiniMax: the AI algorithm for selecting the best player move in a game of
-Tic-Tac-Toe. The initial board was augmented in order to provide a longer
-running benchmark.
+\item Shortest Path (SP): a slightly modified version of the program presented
+   in Fig.~\ref{fig:shortest_path_program}, where the shortest distance is
+   computed from all nodes to all nodes.
 
 \item N-Queens: the classic puzzle for placing queens on a chess board so that
 no two queens threaten each other.
@@ -33,18 +27,24 @@ no two queens threaten each other.
 
 \item Heat Transfer: an asynchronous program that performs transfer of heat
 between nodes.
+
+\item MiniMax: the AI algorithm for selecting the best player move in
+   a Tic-Tac-Toe game. The initial board was augmented in order to provide a
+   longer running benchmark.
+
 \end{itemize}
 
-Table~\ref{fig:table_results} presents the results comparing compiled code and
-interpreted code against C programs. Comparisons to other systems are shown
-under the \textbf{Other} column. Note that the program sizes are in ascending
+Table~\ref{fig:table_results} presents experimental results comparing the
+compiled and interpreted code versions against the C program versions.
+Comparisons to other systems are shown under the \textbf{Other} column. Note
+that for some programs, we present different program sizes shown in ascending
 order.
 
 \begin{table}[ht]
 \begin{center}
     \begin{tabular}{ | l | c | c | c | c | c |}
     \hline
-    \textbf{Program} & \textbf{Size} & \textbf{Time} (s) & \textbf{Compiled} & \textbf{Interpreted}
+    \textbf{Program} & \textbf{Size} & \textbf{C Time} (s) & \textbf{Compiled} & \textbf{Interpreted}
     & \textbf{Other} \\ \hline \hline
     \multirow{3}{*}{Shortest Path} & US Airports & 0.1 & 4.7 & 9.7 & 13.3 (python) \\
                                    & OCLinks & 0.4 & 6.3 & 13.5 & 11.2 (python) \\
@@ -59,31 +59,37 @@ order.
                                         & 400 & 180 & 1.3 & 1.4 & 1.1 (GL) \\ \hline \hline
     \multirow{2}{*}{Heat Transfer} & 80 & 7.3 & 6.9 & 10.6 & - \\
                                    & 120 & 32 & 7.6 & 11.6 & - \\ \hline \hline
-    MiniMax & - & 7.3 & 4.0 & 6.2 & 9.3 \\ \hline \hline
+
+                                   MiniMax & - & 7.3 & 4.0 & 6.2 & 9.3 (python) \\ \hline \hline
     \end{tabular}
 \end{center}
+
 \caption{Experimental results comparing different programs against hand-written
-   versions in C. \textbf{Lower is better.} The numbers in the table are computed by dividing the
-   execution time of the system of that column by the execution time of a
-   similar hand-written version in C.}
+   versions in C. For the C versions, we show the execution time in seconds
+   (column \textbf{C Time} (s)). For the other approaches, we show the overhead
+   ratio compared with the corresponding C version.  The overhead numbers are
+   computed by dividing the execution time of the approach on that column by the
+   execution time of the similar hand-written version in C. \textbf{Lower is
+      better.}}
+
 \label{fig:table_results}
 \end{table}
 
-The Shortest Path program shows good improvements from the interpreted run
-time, since the run time is reduced by around 50\%. This indicates that the
-program performs repeated comparisons between integer numbers, which tend to be
-slower in interpreted code. The good performance results come from the fact that
-the program has only two rules where the shortest distance fact is updated or
-kept. The distance facts are also indexed by the source node, which helps the
-code filter through the candidate distances more quickly.
+The Shortest Path program shows good improvements from the interpreted version,
+since the run time is reduced between 53% to 69%.  The good performance results
+come from the fact that the program performs repeated comparisons between
+integer numbers, which tend to be slower in interpreted code and from the fact
+that the program has only two rules where the shortest distance fact is updated
+or kept.  The distance facts are also indexed by the source node, which helps
+the code filter through the candidate distances more quickly. This is helpful
+since the program computes the shortest distance between pairs of nodes.
 
 N-Queens presents some scalability issues for our compilation scheme due to the
-exponential increase of facts as the problem size increases,
-however, the same behavior can also be observed in the Python program. The
-interpreted version is already reasonably fast (slowdown is less than 10). The
-compiled version reduces the interpreted run time by 20\% which indicates that
-not many operations are performed in the rules and most of the run time is spent
-manipulating the database.
+exponential increase of facts as the problem size increases.  The same behavior
+can be observed for the Python programs. Regarding the comparison with the
+interpreted version, the compiled version reduces the interpreted run time by
+20\% which indicates that not many operations are performed in the rules and
+most of the run time is spent in manipulating the database.
 
 The Belief Propagation program is made of many expensive floating point
 calculations. The interpreted version used external functions written in C to
@@ -91,10 +97,10 @@ implement those operations because otherwise it would be too slow. Therefore,
 and since the rules tend to manipulate a small number of facts, the interpreted
 and compiled versions perform about the same. This program has also the best
 results which proves that the program spends a huge amount of time performing
-floating point calculations. For comparison purposes, we used GraphLab, an
-efficient machine learning framework for writing parallel graph-based machine
-learning algorithms in C++.  GraphLab's ~\cite{GraphLab2010} version of the
-algorithm is slightly slower than the C version.
+floating point calculations. For comparison purposes, we used GraphLab (GC in
+the table), an efficient machine learning framework for writing parallel
+graph-based machine learning algorithms in C++.  GraphLab's ~\cite{GraphLab2010}
+version of the algorithm is slightly slower than the C version.
 
 The Heat Transfer program also performs floating operations but in a much
 smaller scale than Belief Propagation. This is noticiable from the results since
@@ -103,15 +109,16 @@ compute many sum aggregates, which makes the interpreted version incur in some
 overhead due to the integer operations.
 
 While all the other programs perform computations on a pre-defined set of nodes,
-the MiniMax program creates the nodes of the graph dynamically.
-Creating new nodes, requires creating new databases which tends to take a
-considerable fraction of the run time. This is attested by the small reduction
-of run time from the compiled version to the interpreted version.
+the MiniMax program creates the nodes of the graph dynamically.  Creating new
+nodes, requires creating new databases which tends to take a considerable
+fraction of the run time. This is attested by the relatively small reduction of
+run time from the compiled version to the interpreted version.
 
 It should be noted that in these programs there is a slightly parallelization
-overhead, since the supporting runtime allows programs to be parallelized.
-This means that most programs shown in Table~\ref{fig:table_results} easily beat C
-when using 2 to 6 threads.
+overhead, since the supporting runtime is designed to explore parallelism
+implicitely. However, we are using the system to only run programs sequentially.
+This means that if we activate the parallel execution, most programs shown in
+Table~\ref{fig:table_results} easily beat C when using 2 to 6 threads.
 
 
 \iffalse
