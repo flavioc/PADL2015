@@ -93,9 +93,9 @@ application of the SSSP program rules.
   \hspace{0.02cm}
   \subfloat[]{\includegraphics[width=0.32\textwidth]{figures/shortest8}}
 \end{center}
-\caption{Graphical representation of the SSSP program. (a) represents the
-   program after propagating initial distance at node \mytt{@1}, followed by
-   (b) where the first rule is applied in node \mytt{@2}. (c)
+\caption{Graphical representation of the SSSP program: (a) represents the
+   program after propagating the initial distance at node \mytt{@1}, followed by
+   (b) where the first rule is applied in node \mytt{@2} and by (c) that
    represents the final state of the program, where all the shortest paths
    have been computed.}
 \label{fig:shortest_path_program}
@@ -181,7 +181,7 @@ list). Consider, for example, the following rule:
 
 \begin{Verbatim}[fontsize=\scriptsize]
 const P = ... // number of nodes
-const damp = 0.15.
+const damp = ... // probability of random jump to another page (for PageRank computation)
 
 update(A), pagerank(A, OldRank)
       -o [sum => V | B | neighbor-pagerank(A, B, V) |

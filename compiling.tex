@@ -20,8 +20,8 @@ The fact constraints include the facts required to trigger the rule, namely
 \texttt{shortest(A, D1, P1)} and \texttt{relax(A, D2, P2)}, and the join
 constraints include the expression \texttt{D1 <= D2}.
 
-However, rules may also have other less obvious join constraints such as
-variable constraints in the following rule:
+However, rules may also have other less obvious join constraints, such as
+variable constraints, as in the following rule:
 
 \begin{Verbatim}[fontsize=\scriptsize]
 new-neighbor-pagerank(A, B, New),
@@ -192,7 +192,7 @@ facts are only used in lower priority rules. This is specified in the final
 then we always jump to the first loop that uses linear facts. We must jump to
 the first linear loop because we cannot use the next fact from the deepest loop
 since we may have constraints between the first linear loop and the deepest loop
-that were validated using deleted facts.
+that were previously validated using facts that were deleted in the meantime.
 
 \subsection{Updating Facts}
 

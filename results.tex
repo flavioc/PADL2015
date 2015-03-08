@@ -1,9 +1,8 @@
 This section presents experimental results for our compilation strategy.  We
 compare the execution speed of our new compiled code against hand-written
 implementations in C of the same programs. We also compare the results against
-interpreted execution. Although interpreted execution uses a similar
-translation, it helps us understand the limitations of the compilation scheme
-when removing the interpretation overhead.
+interpreted execution in order to help us understand the limitations of the
+compilation scheme when removing the interpretation overhead.
 
 For our experimental setup, we used a computer with a 24 (4x6) Core AMD
 Opteron(tm) Processor 8425 HE $@$ 800 MHz with 64 GBytes of RAM memory running
@@ -49,7 +48,7 @@ order.
     \multirow{3}{*}{Shortest Path} & US Airports & 0.1 & 4.7 & 9.7 & 13.3 (python) \\
                                    & OCLinks & 0.4 & 6.3 & 13.5 & 11.2 (python) \\
                                    & Powergrid & 0.9 & 4.2 & 13.5 & 10.6 (python) \\ \hline \hline
-    \multirow{3}{*}{N-Queens} & 11 & 0.2 & 3.2 & 4.7 & 20.8 (python) \\
+    \multirow{4}{*}{N-Queens} & 11 & 0.2 & 3.2 & 4.7 & 20.8 (python) \\
                               & 12 & 1.3 & 4.6 & 6 & 24.1 (python) \\
                               & 13 & 7.8 & 6.2 & 7.6 & 26.0 (python) \\
                               & 14 & 49 & 7.3 & 8.8 & 28.0 (python) \\ \hline \hline
@@ -67,18 +66,18 @@ order.
 \caption{Experimental results comparing different programs against hand-written
    versions in C. For the C versions, we show the execution time in seconds
    (column \textbf{C Time} (s)). For the other approaches, we show the overhead
-   ratio compared with the corresponding C version.  The overhead numbers are
-   computed by dividing the execution time of the approach on that column by the
-   execution time of the similar hand-written version in C. \textbf{Lower is
-      better.}}
+   ratio compared with the corresponding C version.  The overhead numbers
+   (\textbf{lower is better}) are computed by dividing the execution time of the
+approach on that column by the execution time of the similar hand-written
+version in C.}
 
 \label{fig:table_results}
 \end{table}
 
 The Shortest Path program shows good improvements from the interpreted version,
-since the run time is reduced between 53% to 69%.  The good performance results
+since the run time is reduced between 53\% to 69\%.  The good performance results
 come from the fact that the program performs repeated comparisons between
-integer numbers, which tend to be slower in interpreted code and from the fact
+integer numbers, which tend to be slower in interpreted code, and from the fact
 that the program has only two rules where the shortest distance fact is updated
 or kept.  The distance facts are also indexed by the source node, which helps
 the code filter through the candidate distances more quickly. This is helpful
@@ -114,11 +113,12 @@ nodes, requires creating new databases which tends to take a considerable
 fraction of the run time. This is attested by the relatively small reduction of
 run time from the compiled version to the interpreted version.
 
-It should be noted that in these programs there is a slightly parallelization
-overhead, since the supporting runtime is designed to explore parallelism
-implicitely. However, we are using the system to only run programs sequentially.
-This means that if we activate the parallel execution, most programs shown in
-Table~\ref{fig:table_results} easily beat C when using 2 to 6 threads.
+It should be noted that in these programs there is a parallelization overhead
+since the supporting runtime is designed to explore parallelism implicitely.  In
+our experiments we measured a 10\% overhead for programs that need to reference
+count many runtime structs such as lists. Fortunately, if the programmer desires
+to use the parallel facilities of LM, she will able to run them faster than C
+using from 2 to 4 threads.
 
 
 \iffalse
