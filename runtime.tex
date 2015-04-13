@@ -8,6 +8,16 @@ node of the graph stores 4 main data structures: (1) the \emph{rule matching
 (3) the \emph{database of linear facts}; and (4) the \emph{database of
    persistent facts}.
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-1.2cm}
+\begin{center}
+   \includegraphics[width=0.5\textwidth]{figures/overview.pdf}
+\end{center}
+\caption{Node data structures.}
+\label{fig:node}
+\vspace{-0.7cm}
+\end{wrapfigure}
+
 The rule engine maintains a simplified view of the two fact databases and
 efficiently decides which rules need to be executed. For instance, if a rule $r$
 needs facts \texttt{a} and \texttt{b} to be applied and the database already
@@ -24,16 +34,6 @@ reasonably fast mechanisms for lookup. The database of facts is partitioned by
 predicate, therefore, each predicate can have its own data structure depending
 on the patterns of access for that particular predicate. Linear facts are stored
 using the following data structures:
-
-\begin{wrapfigure}{r}{0.5\textwidth}
-\vspace{-1cm}
-\begin{center}
-   \includegraphics[width=0.5\textwidth]{figures/overview.pdf}
-\end{center}
-\caption{Node data structures.}
-\label{fig:node}
-\vspace{-2cm}
-\end{wrapfigure}
 
 
 \begin{itemize}

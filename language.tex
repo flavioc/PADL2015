@@ -23,7 +23,7 @@ execution starts by adding the initial facts (called the axioms) to the
 database. Next, rules are recursively applied and the database is updated by
 adding new facts or deleting facts used during rule derivation.  When no more
 rules are applicable, the program terminates. Rules have a defined priority
-(their position in the source file) and higher priority rules are fired first.
+(their position in the source file) and highest priority rules are fired first.
 If a new fact is derived and there is a set of applicable rules to be fired, the
 higher priority rule is selected before the others.
 
@@ -68,7 +68,7 @@ shortest(A, D1, P1), D1 <= D2, relax(A, D2, P2)
 \label{code:shortest_path_program}
 \end{topfig}
 
-The first rule of the program (lines 11-14) reads as following: if the current
+The first rule of the program (lines 11-14) reads as follows: if the current
 \mytt{shortest} path \mytt{P1} with distance \mytt{D1} is larger than a new
 \texttt{relax} path with distance \mytt{D2}, then replace the current shortest
 path with \mytt{D2}, delete the new \mytt{relax} and propagate new paths to
@@ -77,7 +77,7 @@ iterates over the edges of node \mytt{A} and derives a new \mytt{relax} fact for
 each node \mytt{B} with the distance \mytt{D2 + W}, where \mytt{W} is the weight
 of the edge.
 
-The second rule of the program (lines 16-17) is read as following: if the
+The second rule of the program (lines 16-17) is read as follows: if the
 current shortest distance \mytt{D1} is shorter than a new \texttt{relax}
 distance \mytt{D2}, then delete the new \mytt{relax} fact and keep the current
 shortest path.
@@ -87,11 +87,11 @@ application of the SSSP program rules.
 
 \begin{figure}[ht]
 \begin{center}
-  \subfloat[]{\includegraphics[width=0.32\textwidth]{figures/shortest2}}
-  \hspace{0.02cm}
-  \subfloat[]{\includegraphics[width=0.32\textwidth]{figures/shortest3}}
-  \hspace{0.02cm}
-  \subfloat[]{\includegraphics[width=0.32\textwidth]{figures/shortest8}}
+  \subfloat[]{\includegraphics[width=0.45\textwidth]{figures/shortest2}}
+  \hspace{0.01cm}
+  \subfloat[]{\includegraphics[width=0.45\textwidth]{figures/shortest3}}
+  \hspace{0.01cm}
+  \subfloat[]{\includegraphics[width=0.45\textwidth]{figures/shortest8}}
 \end{center}
 \caption{Graphical representation of the SSSP program: (a) represents the
    program after propagating the initial distance at node \mytt{@1}, followed by

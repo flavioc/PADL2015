@@ -39,27 +39,28 @@ Comparisons to other systems are shown under the \textbf{Other} column. Note
 that for some programs, we present different program sizes shown in ascending
 order.
 
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
     \begin{tabular}{ | l | c | c | c | c | c |}
     \hline
     \textbf{Program} & \textbf{Size} & \textbf{C Time} (s) & \textbf{Compiled} & \textbf{Interpreted}
     & \textbf{Other} \\ \hline \hline
-    \multirow{3}{*}{Shortest Path} & US Airports & 0.1 & 4.7 & 9.7 & 13.3 (python) \\
-                                   & OCLinks & 0.4 & 6.3 & 13.5 & 11.2 (python) \\
-                                   & Powergrid & 0.9 & 4.2 & 13.5 & 10.6 (python) \\ \hline \hline
-    \multirow{4}{*}{N-Queens} & 11 & 0.2 & 3.2 & 4.7 & 20.8 (python) \\
-                              & 12 & 1.3 & 4.6 & 6 & 24.1 (python) \\
-                              & 13 & 7.8 & 6.2 & 7.6 & 26.0 (python) \\
-                              & 14 & 49 & 7.3 & 8.8 & 28.0 (python) \\ \hline \hline
+    \multirow{3}{*}{Shortest Path} & US Airports & 0.1 & 3.9 & 13.9 & 13.3 (python) \\
+                                   & OCLinks & 0.4 & 5.6 & 14.2 & 11.2 (python) \\
+                                   & Powergrid & 0.9 & 3.5 & 11.3 & 10.6 (python) \\ \hline \hline
+    \multirow{4}{*}{N-Queens} & 11 & 0.2 & 1.4 & 3.9 & 20.8 (python) \\
+                              & 12 & 1.3 & 3.2 & 5.3 & 24.1 (python) \\
+                              & 13 & 7.8 & 3.8 & 6.6 & 26.0 (python) \\
+                              & 14 & 49 & 4.5 & 8.9 & 28.0 (python) \\ \hline
+                              \hline
     \multirow{4}{*}{Belief Propagation} & 50 & 2.8 & 1.3 & 1.4 & 1.1 (GL) \\
                                         & 200 & 51 & 1.3 & 1.4 & 1.1 (GL) \\ 
                                         & 300 & 141 & 1.3 & 1.4 & 1.1 (GL) \\
                                         & 400 & 180 & 1.3 & 1.4 & 1.1 (GL) \\ \hline \hline
-    \multirow{2}{*}{Heat Transfer} & 80 & 7.3 & 6.9 & 10.6 & - \\
-                                   & 120 & 32 & 7.6 & 11.6 & - \\ \hline \hline
+    \multirow{2}{*}{Heat Transfer} & 80 & 7.3 & 4.6 & 9.9 & - \\
+                                   & 120 & 32 & 5.3 & 10.5 & - \\ \hline \hline
 
-                                   MiniMax & - & 7.3 & 4.0 & 6.2 & 9.3 (python) \\ \hline \hline
+  MiniMax & - & 7.3 & 3.2 & 7.1 & 9.3 (python) \\ \hline \hline
     \end{tabular}
 \end{center}
 
@@ -72,23 +73,24 @@ approach on that column by the execution time of the similar hand-written
 version in C.}
 
 \label{fig:table_results}
+    \vspace*{-0.7cm}
 \end{table}
 
 The Shortest Path program shows good improvements from the interpreted version,
-since the run time is reduced between 53\% to 69\%.  The good performance results
+since the run time is reduced between 61\% and 72\%.  The good performance results
 come from the fact that the program performs repeated comparisons between
 integer numbers, which tend to be slower in interpreted code, and from the fact
 that the program has only two rules where the shortest distance fact is updated
 or kept.  The distance facts are also indexed by the source node, which helps
-the code filter through the candidate distances more quickly. This is helpful
+the code filter through the candidate distances faster. This is helpful
 since the program computes the shortest distance between pairs of nodes.
 
 N-Queens presents some scalability issues for our compilation scheme due to the
 exponential increase of facts as the problem size increases.  The same behavior
 can be observed for the Python programs. Regarding the comparison with the
 interpreted version, the compiled version reduces the interpreted run time by
-20\% which indicates that not many operations are performed in the rules and
-most of the run time is spent in manipulating the database.
+almost 50\% which indicates that there are more database operations in N-Queens
+than in Shortest Path.
 
 The Belief Propagation program is made of many expensive floating point
 calculations. The interpreted version used external functions written in C to
@@ -101,7 +103,7 @@ the table), an efficient machine learning framework for writing parallel
 graph-based machine learning algorithms in C++.  GraphLab's ~\cite{GraphLab2010}
 version of the algorithm is slightly slower than the C version.
 
-The Heat Transfer program also performs floating operations but in a much
+The Heat Transfer program also performs floating point operations but in a much
 smaller scale than Belief Propagation. This is noticiable from the results since
 the slowdown is much larger than Belief Propagation. The program also needs to
 compute many sum aggregates, which makes the interpreted version incur in some
@@ -109,35 +111,20 @@ overhead due to the integer operations.
 
 While all the other programs perform computations on a pre-defined set of nodes,
 the MiniMax program creates the nodes of the graph dynamically.  Creating new
-nodes, requires creating new databases which tends to take a considerable
-fraction of the run time. This is attested by the relatively small reduction of
-run time from the compiled version to the interpreted version.
+nodes requires creating new databases which tends to take a considerable
+fraction of the run time. However, we have seen a good reduction in run time
+when compared to the interpreted version, which we think is the result of
+low-level optimizations that were applied in the compiled version.
 
 It should be noted that in these programs there is a parallelization overhead
-since the supporting runtime is designed to explore parallelism implicitely.  In
-our experiments we measured a 10\% overhead for programs that need to reference
-count many runtime structs such as lists. Fortunately, if the programmer desires
-to use the parallel facilities of LM, she will able to run them faster than C
-using from 2 to 4 threads.
+since the supporting runtime is designed to explore parallelism implicitly.  In
+our experiments we measured a 20\% overhead for N-Queens, a program that needs
+to reference count many lists during run time. Fortunately, if the programmer
+desires to use the parallel facilities of LM, she will be able to run programs
+faster than C using between 2 or 4 threads.
 
 
 \iffalse
-interpreted
-sp powergrid: 13007
-sp oclinks: 5704
-sp airports: 1199
-minimax: 45207
-queens 11: 1124
-queens 12: 7925
-queens 13: 60221
-queens 14: 436541
-bp 50: 3826
-bp 200: 74407
-bp 300: 198903
-bp 400: 260063
-ht 80: 77277
-ht 120: 382982
-
 C
 sp powergrid: 966
 sp oclinks: 422
@@ -171,6 +158,56 @@ bp 300: 156457
 bp 400: 200000
 
 compiled
+queens 11: 345
+queens 12: 4314
+queens 13: 30385
+queens 14: 225885
+minimax: 23366
+sp powergrid: 3467
+sp oclinks: 2364
+sp airports: 458
+bp 50: 3576
+bp 200: 61746
+bp 300: 175512
+bp 400: 220225
+ht 80: 34228
+ht 120: 175598
+
+interpreted
+sp powergrid: 13439
+sp oclinks: 5986
+sp airports: 1297
+minimax:  51507
+queens 11: 941
+queens 12: 6969
+queens 13: 51806
+queens 14: 437493
+bp 50: 4157
+bp 200:
+bp 300:
+bp 400:
+ht 80: 72360
+ht 120: 345930
+
+%%%%% old
+
+interpreted
+sp powergrid: 13007
+sp oclinks: 5704
+sp airports: 1199
+minimax: 45207
+queens 11: 1124
+queens 12: 7925
+queens 13: 60221
+queens 14: 436541
+bp 50: 3826
+bp 200: 74407
+bp 300: 198903
+bp 400: 260063
+ht 80: 77277
+ht 120: 382982
+
+compiled
 sp powergrid: 4075
 sp oclinks: 2667
 sp airports: 547
@@ -185,4 +222,5 @@ bp 300: 172000
 bp 400: 229012
 ht 80: 50486
 ht 120: 254359
+
 \fi

@@ -134,7 +134,7 @@ of the language.
 \end{figure}
 
 Figure~\ref{alg:compile_rule} presents the algorithm for compiling rules into
-C++ code. First we split the body of the rule into fact expressions and
+C++ code. First, we split the body of the rule into fact expressions and
 constraints. Fact expressions map directly to iterators while fact constraints
 map to \emph{if} expressions. A possible compilation strategy is to first
 compile all the fact expressions and then compile the constraints. However, this
@@ -235,7 +235,7 @@ next: continue;
 Note that \texttt{neighbor-pagerank} is updated using \texttt{set\_float}. The
 rule also does not return since this is the highest priority rule. If there
 was a higher priority rule using \texttt{neighbor-pagerank}, then the code
-would have to return since an update fact represents a new fact.
+would have to return since an updated fact represents a new fact.
 
 \subsection{Enforcing Linearity}
 
@@ -294,6 +294,7 @@ now to the value \texttt{6}, the expected result.
 \end{minipage}
 \caption{Executing the add rule.  }
 \label{fig:update_add}
+\vspace*{-0.4cm}
 \end{figure}
 
 \subsection{Comprehensions}
