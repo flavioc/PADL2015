@@ -93,6 +93,7 @@ of the language.
     
 
 \begin{figure}
+\scalebox{0.8}{
 \begin{algorithm}[H]
  \KwData{Rule R1, Rules}
  \KwResult{Compiled Code}
@@ -128,7 +129,7 @@ of the language.
     $Code.InsertGoto(FirstLinear(Iterators))$\;
  }
  \Return{$Code$}
-\end{algorithm}
+\end{algorithm}}
  \caption{Compiling LM rules into C++ code.}
  \label{alg:compile_rule}
 \end{figure}
@@ -280,21 +281,21 @@ now to the value \texttt{6}, the expected result.
 
 \begin{figure}
 \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.40\textwidth}
   \centering
-  \includegraphics[width=.8\linewidth]{figures/update}
+  \includegraphics[width=.9\linewidth]{figures/update}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.40\textwidth}
   \centering
-  \includegraphics[width=0.8\linewidth]{figures/update2}
+  \includegraphics[width=0.9\linewidth]{figures/update2}
 \end{minipage}
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.40\textwidth}
    \centering
-  \includegraphics[width=0.8\linewidth]{figures/update3}
+  \includegraphics[width=0.9\linewidth]{figures/update3}
 \end{minipage}
-\caption{Executing the add rule.  }
+\caption{Executing the add rule.}
 \label{fig:update_add}
-\vspace*{-0.4cm}
+%\vspace*{-0.4cm}
 \end{figure}
 
 \subsection{Comprehensions}
