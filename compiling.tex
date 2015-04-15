@@ -18,10 +18,9 @@ shortest(A, D1, P1), D1 <= D2, relax(A, D2, P2)
 
 The fact constraints include the facts required to trigger the rule, namely
 \texttt{shortest(A, D1, P1)} and \texttt{relax(A, D2, P2)}, and the join
-constraints include the expression \texttt{D1 <= D2}.
-
-However, rules may also have other less obvious join constraints, such as
-variable constraints, as in the following rule:
+constraints include the expression \texttt{D1 <= D2}.  However, rules may also
+have other less obvious join constraints, such as variable constraints, as in
+the following rule:
 
 \begin{Verbatim}[fontsize=\scriptsize]
 new-neighbor-pagerank(A, B, New),
@@ -35,14 +34,14 @@ facts\footnote{Rule taken from an asynchronous PageRank program.}.
 \subsection{Iterators}
 
 The data structures for facts presented in Section~\ref{sec:data_structures}
-support the \emph{iterator} pattern. For linked lists, the iterator goes
-through every fact in the list while the hash table iterator can either iterate
-through the whole table or iterate through a single bucket. A bucket iterator is
-in fact a linked list iterator that starts from a given argument.
-For tries, while the default iterator goes through every fact in
-the trie, it can be customized with a matching specification in
-order to reduce search. A matching specification includes argument
-assignments (e.g., argument $i = V$, where $V$ is a concrete value).
+support the \emph{iterator} pattern. For linked lists, the iterator goes through
+every fact in the list while the hash table iterator can either iterate through
+the whole table or iterate through a single bucket. A bucket iterator is in fact
+a linked list iterator that starts from a given argument.  For tries, while the
+default iterator goes through every fact in the trie, it can be customized with
+a matching specification in order to reduce search. A matching specification
+includes argument assignments (e.g., argument $i = V$, where $V$ is a concrete
+value).
 
 Iterators are heavily used in the compiled code. For instance, the second rule
 of the SSSP program presented in Fig.~\ref{code:shortest_path_program} is
@@ -57,10 +56,8 @@ for(auto it1(list("shortest").begin()); it1 != list("shortest").end(); ) {
          fact *new_shortest(new fact("shortest"));
          new_shortest->set_int(1, f1->get_int(1));
          new_shortest->set_list(2, f1->get_list(2));
-
          // new fact was derived
          list("shortest").push_back(new_shortest);
-
          // deleting facts
          it1 = list("shortest").erase(it1); // remove from list
          it2 = list("relax").erase(it2);
@@ -71,7 +68,6 @@ for(auto it1(list("shortest").begin()); it1 != list("shortest").end(); ) {
    ++it1;
 }
 \end{Verbatim}
-
 
 The compilation algorithm iterates through the fact expressions in the body of
 the rule and creates nested loops to try all the possible combinations of facts.
@@ -182,9 +178,8 @@ node has one \texttt{shortest} fact and this compiled code simply filters out
 the \texttt{relax} facts with the distances that are equal or greater than the
 current best distance. Note that now we have a \emph{goto statement} (line 7)
 that is executed when the rule is fired.  In this case, since no new
-\texttt{shortest} fact was derived, we can avoid returning to enforce rule
-priorities and we can continue to try to fire the rule as many times as
-possible.
+\texttt{shortest} fact was derived, we avoid returning to enforce rule
+priorities and continue to try to fire the rule as many times as possible.
 
 All the rule combinations are attempted in cases where a rule does not derive
 any facts or the facts derived do not appear before the rule, that is, the new
@@ -284,7 +279,7 @@ now to the value \texttt{6}, the expected result.
 \begin{minipage}{.40\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{figures/update}
-\end{minipage}%
+\end{minipage}\hspace{0.5cm}
 \begin{minipage}{.40\textwidth}
   \centering
   \includegraphics[width=0.9\linewidth]{figures/update2}

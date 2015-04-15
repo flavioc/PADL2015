@@ -2,21 +2,21 @@ In this section, we review the supporting runtime that is used by the compiler.
 We focus mostly on the structure of the nodes since inference rules are compiled
 from the point of view of the node data structure.
 
-Figure~\ref{fig:node} presents the layout of the node data structures.  Each
-node of the graph stores 4 main data structures: (1) the \emph{rule matching
-   engine}; (2) a \emph{fact buffer} for storing incoming and temporary facts;
-(3) the \emph{database of linear facts}; and (4) the \emph{database of
-   persistent facts}.
-
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}{r}{0.5\linewidth}
 %\vspace{-1.2cm}
 \begin{center}
-   \includegraphics[width=0.5\textwidth]{figures/overview.pdf}
+   \includegraphics[width=1\linewidth]{figures/overview.pdf}
 \end{center}
 \caption{Node data structures.}
 \label{fig:node}
 %\vspace{-0.7cm}
 \end{wrapfigure}
+
+Figure~\ref{fig:node} presents the layout of the node data structures.  Each
+node of the graph stores 4 main data structures: (1) the \emph{rule matching
+   engine}; (2) a \emph{fact buffer} for storing incoming and temporary facts;
+(3) the \emph{database of linear facts}; and (4) the \emph{database of
+   persistent facts}.
 
 The rule engine maintains a simplified view of the two fact databases and
 efficiently decides which rules need to be executed. For instance, if a rule $r$
@@ -25,7 +25,7 @@ contains \texttt{a} facts, once a \texttt{b} fact is derived, the rule engine
 schedules $r$ to be executed. The compiler is responsible for the code that is
 executed when a rule is scheduled.  A compiled rule contains instructions to
 search and match facts from the database and to derive new facts when the body
-of the rule is successfully matched.
+of the rule is matched.
 
 In this context, the organization of the database structures is critical because
 linear facts can be retracted and asserted frequently. This means that the
@@ -45,12 +45,12 @@ using the following data structures:
    number of facts.
 
 \item \emph{Hash Table Data Structures}. For predicates with many facts we use
-   hash tables. Hash tables are more efficient for repetitive lookup
-   operations using a specific argument (i.e., searching for facts with a
-   concrete value) and build upon lists by hashing facts using a
-   specific argument and then using separate chaining with doubly-linked lists
-   for collision resolution. Hash tables are, on average, $\mathcal{O}(1)$ for
-   insertion, deletion and lookup, however they require more memory.
+   hash tables. Hash tables are efficient for repetitive lookup operations
+   using a specific argument (i.e., searching for facts with a concrete value)
+   and build upon lists by hashing facts using a specific argument and then
+   using separate chaining with doubly-linked lists for collision resolution.
+   Hash tables are, on average, $\mathcal{O}(1)$ for insertion, deletion and
+   lookup, however they require more memory.
 
 \end{itemize}
 
