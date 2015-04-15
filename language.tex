@@ -84,7 +84,7 @@ the application of the SSSP program rules.
 \begin{figure}[ht]
 \begin{center}
   \subfloat[]{\includegraphics[width=0.40\textwidth]{figures/shortest2}}
-  \hspace{0.01cm}
+  \hspace{0.5cm}
   \subfloat[]{\includegraphics[width=0.40\textwidth]{figures/shortest3}}
   \hspace{0.01cm}
   \subfloat[]{\includegraphics[width=0.40\textwidth]{figures/shortest8}}
@@ -154,7 +154,9 @@ those expressions may use all the variables instantiated in the body.
 
 Comprehensions are similar to the functional programming construct of the same
 name.  Comprehensions are sub-rules that are applied for all possible
-combinations. In a comprehension $\comprehension{\widehat{x}}{SB}{SH}$,
+combinations. In a comprehension
+$\comprehension{\widehat{x}}{SB}{SH}$\footnote{We substitute $;$ for $|$ in the
+abstract syntax to avoid confusion with the grammar choice operator.},
 $\widehat{x}$ is a list of variables, $SB$ is the body of the comprehension and
 $SH$ is the head. The body $SB$ is used to generate all possible combinations
 for the head $SH$, according to the facts in the database.  An example was shown
