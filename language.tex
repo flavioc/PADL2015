@@ -5,10 +5,9 @@
 
 LM is a forward-chaining linear logic programming language that allows logical
 facts to be asserted and retracted in a structured fashion.  A LM program can be
-seen as a graph of nodes, where each node contains a database of logical facts.
-The program is written as a set of inference rules that apply over the logical
-facts of a node. When rules are applied, facts are asserted or retracted from
-the node database.
+seen as a graph of nodes, where each node contains a database of facts.  The
+program is written as a set of inference rules that apply over the facts of a
+node.
 
 LM rules have the form \mytt{a(X), b(Y) -o c(X, Y)} and can be read as follows:
 if fact \mytt{a(X)} and fact \mytt{b(Y)} exist in the database then fact

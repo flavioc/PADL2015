@@ -2,6 +2,12 @@ In this section, we review the supporting runtime that is used by the compiler.
 We focus mostly on the structure of the nodes since inference rules are compiled
 from the point of view of the node data structure.
 
+Figure~\ref{fig:node} presents the layout of the node data structures.  Each
+node of the graph stores 4 main data structures: (1) the \emph{rule matching
+   engine}; (2) a \emph{fact buffer} for storing incoming and temporary facts;
+(3) the \emph{database of linear facts}; and (4) the \emph{database of
+   persistent facts}.
+
 \begin{wrapfigure}{r}{0.5\linewidth}
 %\vspace{-1.2cm}
 \begin{center}
@@ -12,11 +18,6 @@ from the point of view of the node data structure.
 %\vspace{-0.7cm}
 \end{wrapfigure}
 
-Figure~\ref{fig:node} presents the layout of the node data structures.  Each
-node of the graph stores 4 main data structures: (1) the \emph{rule matching
-   engine}; (2) a \emph{fact buffer} for storing incoming and temporary facts;
-(3) the \emph{database of linear facts}; and (4) the \emph{database of
-   persistent facts}.
 
 The rule engine maintains a simplified view of the two fact databases and
 efficiently decides which rules need to be executed. For instance, if a rule $r$
